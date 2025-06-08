@@ -1,0 +1,102 @@
+<app-main-layout>
+  <div class="job-search-container">
+    <div class="page-header">
+      <h1>AI Job Search Assistant</h1>
+      <p>Find your perfect job with AI-powered recommendations</p>
+    </div>
+    
+    <div class="search-content">
+      <div class="chat-container">
+        <div class="chat-header">
+          <i class="icon-cpu"></i>
+          <h3>AI Assistant</h3>
+        </div>
+        
+        <div class="chat-messages" #chatMessages>
+          <div *ngIf="messages.length === 0" class="empty-chat">
+            <i class="icon-cpu"></i>
+            <p>Hi! I'm your AI job search assistant. Ask me about jobs, career advice, or anything related to your job search!</p>
+          </div>
+          
+          <div *ngFor="let message of messages" class="message" 
+               [ngClass]="{'user-message': message.isUser, 'ai-message': !message.isUser}">
+            <div class="message-content">
+              {{message.content}}
+              <span class="message-time">{{message.timestamp | date:'short'}}</span>
+            </div>
+          </div>
+          
+          <div *ngIf="isTyping" class="message ai-message">
+            <div class="message-content">
+              <i class="icon-loader"></i> AI is typing...
+            </div>
+          </div>
+        </div>
+        
+        <div class="chat-input">
+          <input 
+            type="text" 
+            [(ngModel)]="currentMessage" 
+            (keyup.enter)="sendMessage()"
+            placeholder="Ask me about jobs, skills, or career advice..."
+            class="message-input"
+            [disabled]="isTyping"
+          >
+          <button 
+            (click)="sendMessage()" 
+            class="send-btn"
+            [disabled]="!currentMessage.trim() || isTyping"
+          >
+            <i class="icon-search"></i>
+            Send
+          </button>
+        </div>
+      </div>
+      
+      <div class="available-jobs">
+        <h3>
+          <i class="icon-briefcase"></i>
+          Available Jobs
+        </h3>
+        
+        <div class="jobs-grid">
+          <div *ngFor="let job of availableJobs" class="job-card">
+            <div class="job-header">
+              <h4>{{job.title}}</h4>
+              <span class="job-type">{{job.jobType}}</span>
+            </div>
+            
+            <div class="job-details">
+              <p><strong>Company:</strong> {{job.company}}</p>
+              <p><strong>Location:</strong> {{job.location}}</p>
+              <p><strong>Salary:</strong> {{job.salary}}</p>
+            </div>
+            
+            <div class="job-description">
+              {{job.description}}
+            </div>
+            
+            <div class="job-actions">
+              <button 
+                (click)="applyToJob(job)" 
+                class="btn btn-primary"
+                [disabled]="job.applied"
+              >
+                <i class="icon-file-text"></i>
+                {{job.applied ? 'Applied' : 'Apply Now'}}
+              </button>
+              <button (click)="viewJobDetails(job)" class="btn btn-secondary">
+                <i class="icon-eye"></i>
+                View Details
+              </button>
+            </div>
+          </div>
+          
+          <div *ngIf="availableJobs.length === 0" class="empty-state">
+            <p>No jobs available at the moment. Try asking the AI assistant for job recommendations!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-main-layout> 

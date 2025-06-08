@@ -1,0 +1,119 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>My Profile</h1>
+    <p>Manage your personal information and skills</p>
+  </div>
+
+  <div class="profile-form">
+    <div class="photo-section">
+      <div class="photo-container">
+        <img 
+          *ngIf="profileData.profilePhoto" 
+          [src]="profileData.profilePhoto" 
+          alt="Profile Photo"
+          class="profile-photo"
+        >
+        <div *ngIf="!profileData.profilePhoto" class="photo-placeholder">
+          <span>No Photo</span>
+        </div>
+      </div>
+      <input 
+        type="file" 
+        (change)="onFileSelect($event)" 
+        accept="image/*"
+        class="file-input"
+        id="photo-upload"
+      >
+      <label for="photo-upload" class="upload-button">
+        Change Photo
+      </label>
+    </div>
+
+    <div class="form-section">
+      <h3>Personal Information</h3>
+      
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          [(ngModel)]="profileData.name"
+          class="form-input"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="profileData.email"
+          class="form-input"
+          readonly
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="field">Field/Industry</label>
+        <input 
+          type="text" 
+          id="field" 
+          [(ngModel)]="profileData.field"
+          class="form-input"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input 
+          type="text" 
+          id="location" 
+          [(ngModel)]="profileData.location"
+          class="form-input"
+        >
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Skills</h3>
+      
+      <div class="skills-input">
+        <input 
+          type="text" 
+          [(ngModel)]="newSkill"
+          (keypress)="$event.key === 'Enter' && addSkill()"
+          placeholder="Add a skill"
+          class="form-input"
+        >
+        <button (click)="addSkill()" class="add-skill-btn">Add</button>
+      </div>
+
+      <div class="skills-list">
+        <span 
+          *ngFor="let skill of profileData.skills; let i = index" 
+          class="skill-tag"
+        >
+          {{skill}}
+          <button (click)="removeSkill(i)" class="remove-skill">×</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button 
+        (click)="saveProfile()" 
+        [disabled]="isLoading"
+        class="save-button"
+      >
+        {{isLoading ? 'Saving...' : 'Save Profile'}}
+      </button>
+    </div>
+
+    <div *ngIf="successMessage" class="success-message">
+      {{successMessage}}
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{errorMessage}}
+    </div>
+  </div>
+</div> 

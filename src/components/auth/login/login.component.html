@@ -1,0 +1,115 @@
+<div class="auth-container">
+  <div class="auth-background">
+    <div class="background-pattern"></div>
+    <div class="background-gradient"></div>
+  </div>
+  
+  <div class="auth-content">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo">
+          <i class="icon-briefcase"></i>
+          <span>AI JobSeeker</span>
+        </div>
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue your job search journey</p>
+      </div>
+
+      <form class="auth-form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input 
+              type="email" 
+              class="form-input" 
+              [(ngModel)]="formData.email"
+              name="email"
+              placeholder="Enter your email"
+              required
+              email
+              #email="ngModel">
+            <div class="form-error" *ngIf="email.invalid && email.touched">
+              Please enter a valid email address
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="password-input-container">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                class="form-input" 
+                [(ngModel)]="formData.password"
+                name="password"
+                placeholder="Enter your password"
+                required
+                #password="ngModel">
+              <button 
+                type="button" 
+                class="password-toggle"
+                (click)="togglePassword()">
+                <i [class]="showPassword ? 'icon-eye-off' : 'icon-eye'"></i>
+              </button>
+            </div>
+            <div class="form-error" *ngIf="password.invalid && password.touched">
+              Password is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-options">
+            <div class="checkbox-group">
+              <input 
+                type="checkbox" 
+                id="remember" 
+                [(ngModel)]="formData.rememberMe"
+                name="rememberMe">
+              <label for="remember">Remember me</label>
+            </div>
+            <a href="#" class="link">Forgot password?</a>
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn btn-primary btn-full"
+          [disabled]="loginForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Sign In</span>
+          <span *ngIf="isLoading" class="loading-spinner">
+            <i class="icon-loader"></i>
+            Signing In...
+          </span>
+        </button>
+
+        <div class="form-error text-center" *ngIf="errorMessage">
+          {{errorMessage}}
+        </div>
+
+        <div class="form-success text-center" *ngIf="successMessage">
+          {{successMessage}}
+        </div>
+      </form>
+
+      <div class="auth-divider">
+        <span>or</span>
+      </div>
+
+      <div class="auth-options">
+        <div class="remember-forgot">
+          <label class="remember-me">
+            <input type="checkbox" [(ngModel)]="formData.rememberMe">
+            Remember me
+          </label>
+          <a href="#" class="forgot-password">Forgot Password?</a>
+        </div>
+      </div>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a routerLink="/register">Sign up</a></p>
+      </div>
+    </div>
+  </div>
+</div> 

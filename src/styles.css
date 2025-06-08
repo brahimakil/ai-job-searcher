@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import './themes/theme.css';
+
+/* Global application styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Icon font styles - using simple CSS approach */
+.icon-briefcase::before { content: '💼'; }
+.icon-menu::before { content: '☰'; }
+.icon-search::before { content: '🔍'; }
+.icon-bell::before { content: '🔔'; }
+.icon-user::before { content: '👤'; }
+.icon-settings::before { content: '⚙️'; }
+.icon-logout::before { content: '🚪'; }
+.icon-log-out::before { content: '🚪'; }
+.icon-chevron-down::before { content: '▼'; }
+.icon-chevron-left::before { content: '◀'; }
+.icon-home::before { content: '🏠'; }
+.icon-file-text::before { content: '📄'; }
+.icon-calendar::before { content: '📅'; }
+.icon-star::before { content: '⭐'; }
+.icon-cpu::before { content: '🤖'; }
+.icon-edit::before { content: '✏️'; }
+.icon-mic::before { content: '🎤'; }
+.icon-zap::before { content: '⚡'; }
+.icon-eye::before { content: '👁️'; }
+.icon-eye-off::before { content: '🙈'; }
+.icon-upload::before { content: '📤'; }
+.icon-x::before { content: '❌'; }
+.icon-loader::before { content: '⏳'; }
+.icon-google::before { content: '🔍'; }
+.icon-plus::before { content: '➕'; }
+.icon-mail::before { content: '📧'; }
+.icon-award::before { content: '🏆'; }
+.icon-lightbulb::before { content: '💡'; }
+.icon-target::before { content: '🎯'; }
+.icon-document::before { content: '📋'; }
+
+[class^="icon-"], [class*=" icon-"] {
+  font-style: normal;
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+} 

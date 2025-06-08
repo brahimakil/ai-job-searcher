@@ -1,0 +1,62 @@
+/* Import icon font first */
+@import url('https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.css');
+
+/* Then import theme styles */
+@import '../themes/theme.css';
+
+/* Icon classes for Feather Icons */
+.icon-briefcase::before { content: '\e900'; }
+.icon-menu::before { content: '\e901'; }
+.icon-search::before { content: '\e902'; }
+.icon-bell::before { content: '\e903'; }
+.icon-user::before { content: '\e904'; }
+.icon-settings::before { content: '\e905'; }
+.icon-logout::before { content: '\e906'; }
+.icon-chevron-down::before { content: '\e907'; }
+.icon-chevron-left::before { content: '\e908'; }
+.icon-home::before { content: '\e909'; }
+.icon-file-text::before { content: '\e90a'; }
+.icon-calendar::before { content: '\e90b'; }
+.icon-star::before { content: '\e90c'; }
+.icon-cpu::before { content: '\e90d'; }
+.icon-edit::before { content: '\e90e'; }
+.icon-mic::before { content: '\e90f'; }
+.icon-zap::before { content: '\e910'; }
+.icon-eye::before { content: '\e911'; }
+.icon-eye-off::before { content: '\e912'; }
+.icon-upload::before { content: '\e913'; }
+.icon-x::before { content: '\e914'; }
+.icon-loader::before { content: '\e915'; }
+.icon-plus::before { content: '\e917'; }
+.icon-mail::before { content: '\e918'; }
+.icon-award::before { content: '\e919'; }
+.icon-lightbulb::before { content: '\e91a'; }
+.icon-target::before { content: '\e91b'; }
+.icon-document::before { content: '\e91c'; }
+
+/* Use actual Feather Icons via CSS classes */
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'feather' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Alternative: Use SVG icons via data attributes */
+.icon-briefcase { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='m16 21-4-4-4 4'%3E%3C/path%3E%3Cpath d='m16 3-4 4-4-4'%3E%3C/path%3E%3C/svg%3E"); }
+.icon-menu { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E"); }
+
+/* For SVG icons, use background-image approach */
+[class^="icon-"], [class*=" icon-"] {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+} 

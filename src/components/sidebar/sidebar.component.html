@@ -1,0 +1,98 @@
+<aside class="app-sidebar" [class.collapsed]="isCollapsed">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <i class="icon-briefcase"></i>
+      <span class="logo-text">AI JobSeeker</span>
+    </div>
+    <button class="collapse-btn" (click)="toggleCollapse()">
+      <i class="icon-chevron-left"></i>
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <h3 class="nav-section-title">Main</h3>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">
+            <i class="icon-home"></i>
+            <span class="nav-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/job-search" routerLinkActive="active" class="nav-link">
+            <i class="icon-search"></i>
+            <span class="nav-text">Job Search</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/interviews" routerLinkActive="active" class="nav-link">
+            <i class="icon-calendar"></i>
+            <span class="nav-text">Interviews</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <h3 class="nav-section-title">Jobs</h3>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a routerLink="/post-job" routerLinkActive="active" class="nav-link">
+            <i class="icon-plus"></i>
+            <span class="nav-text">Post Job</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/my-jobs" routerLinkActive="active" class="nav-link">
+            <i class="icon-briefcase"></i>
+            <span class="nav-text">My Jobs</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <h3 class="nav-section-title">Profile</h3>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a routerLink="/profile" routerLinkActive="active" class="nav-link">
+            <i class="icon-user"></i>
+            <span class="nav-text">My Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/resume" routerLinkActive="active" class="nav-link">
+            <i class="icon-document"></i>
+            <span class="nav-text">My Resume</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-profile">
+      <div class="user-avatar">
+        <img 
+          *ngIf="userPhoto" 
+          [src]="userPhoto" 
+          alt="Profile"
+          class="avatar-img"
+        >
+        <div *ngIf="!userPhoto" class="avatar-placeholder">
+          {{userName.charAt(0).toUpperCase()}}
+        </div>
+      </div>
+      <div class="user-info" *ngIf="!isCollapsed">
+        <span class="user-name">{{userName}}</span>
+        <span class="user-role">Job Seeker</span>
+      </div>
+    </div>
+    
+    <button class="logout-btn" (click)="logout()" title="Logout">
+      <i class="icon-log-out"></i>
+      <span class="nav-text">Logout</span>
+    </button>
+  </div>
+</aside> 

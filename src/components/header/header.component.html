@@ -1,0 +1,74 @@
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+        <i class="icon-menu"></i>
+      </button>
+      <h1 class="page-title">{{pageTitle}}</h1>
+    </div>
+
+    <div class="header-right">
+      <div class="search-box">
+        <i class="icon-search"></i>
+        <input type="text" placeholder="Search..." class="search-input">
+      </div>
+      
+      <div class="header-actions">
+        <button class="action-btn" title="Notifications">
+          <i class="icon-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        
+        <div class="user-menu" (click)="toggleUserMenu()">
+          <img 
+            *ngIf="userPhoto" 
+            [src]="userPhoto" 
+            alt="Profile"
+            class="user-avatar"
+          >
+          <div *ngIf="!userPhoto" class="user-avatar-placeholder">
+            {{userName.charAt(0).toUpperCase()}}
+          </div>
+          <span class="user-name">{{userName}}</span>
+          <i class="icon-chevron-down"></i>
+          
+          <div *ngIf="showUserMenu" class="user-dropdown">
+            <div class="user-info">
+              <img 
+                *ngIf="userPhoto" 
+                [src]="userPhoto" 
+                alt="Profile"
+                class="dropdown-avatar"
+              >
+              <div *ngIf="!userPhoto" class="dropdown-avatar-placeholder">
+                {{userName.charAt(0).toUpperCase()}}
+              </div>
+              <div class="user-details">
+                <span class="user-display-name">{{userName}}</span>
+                <span class="user-role">Job Seeker</span>
+              </div>
+            </div>
+            <hr>
+            <a routerLink="/profile" (click)="showUserMenu = false">
+              <i class="icon-user"></i>
+              My Profile
+            </a>
+            <a routerLink="/resume" (click)="showUserMenu = false">
+              <i class="icon-file-text"></i>
+              My Resume
+            </a>
+            <a routerLink="/my-jobs" (click)="showUserMenu = false">
+              <i class="icon-briefcase"></i>
+              My Jobs
+            </a>
+            <hr>
+            <button (click)="logout()">
+              <i class="icon-logout"></i>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header> 
