@@ -8,18 +8,53 @@
     </div>
 
     <div class="header-right">
-      <div class="search-box">
-        <i class="icon-search"></i>
-        <input type="text" placeholder="Search..." class="search-input">
-      </div>
-      
       <div class="header-actions">
-        <button class="action-btn" title="Notifications">
-          <i class="icon-bell"></i>
-          <span class="notification-badge">3</span>
-        </button>
+        <div class="notifications-container">
+          <button class="action-btn" (click)="toggleNotifications($event)" title="Notifications">
+            <i class="icon-bell"></i>
+            <span *ngIf="unreadCount > 0" class="notification-badge">{{unreadCount}}</span>
+          </button>
+          
+          <div *ngIf="showNotifications" class="notifications-dropdown">
+            <div class="notifications-header">
+              <h4>Notifications</h4>
+              <button *ngIf="unreadCount > 0" (click)="markAllAsRead($event)" class="mark-all-read">
+                Mark all as read
+              </button>
+            </div>
+            
+            <div class="notifications-list">
+              <div *ngIf="isLoadingNotifications" class="no-notifications">
+                <i class="icon-loader"></i>
+                <p>Loading notifications...</p>
+              </div>
+              
+              <div *ngIf="!isLoadingNotifications && notifications.length === 0" class="no-notifications">
+                <i class="icon-bell"></i>
+                <p>No notifications yet</p>
+              </div>
+              
+              <div *ngFor="let notification of notifications" 
+                   class="notification-item" 
+                   [class.unread]="!notification.read"
+                   (click)="markNotificationAsRead(notification, $event)">
+                <div class="notification-icon" [class]="notification.type">
+                  <i [class]="notification.type === 'interview' ? 'icon-calendar' : 
+                             notification.type === 'application' ? 'icon-file-text' : 
+                             notification.type === 'job' ? 'icon-briefcase' : 'icon-info'"></i>
+                </div>
+                <div class="notification-content">
+                  <h5>{{notification.title}}</h5>
+                  <p>{{notification.message}}</p>
+                  <span class="notification-time">{{getTimeAgo(notification.timestamp)}}</span>
+                </div>
+                <div *ngIf="!notification.read" class="unread-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         
-        <div class="user-menu" (click)="toggleUserMenu()">
+        <div class="user-menu" (click)="toggleUserMenu($event)">
           <img 
             *ngIf="userPhoto" 
             [src]="userPhoto" 

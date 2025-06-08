@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="dashboard-stats">
+    <div class="dashboard-stats" *ngIf="!isLoading">
       <div class="stat-card">
         <div class="stat-icon jobs">
           <i class="icon-briefcase"></i>
@@ -23,6 +23,16 @@
         <div class="stat-content">
           <h3 class="stat-number">{{stats.totalJobs}}</h3>
           <p class="stat-label">Available Jobs</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon applications">
+          <i class="icon-file-text"></i>
+        </div>
+        <div class="stat-content">
+          <h3 class="stat-number">{{stats.myApplications}}</h3>
+          <p class="stat-label">My Applications</p>
         </div>
       </div>
 
@@ -47,7 +57,12 @@
       </div>
     </div>
 
-    <div class="dashboard-grid">
+    <div class="dashboard-loading" *ngIf="isLoading">
+      <div class="loading-spinner"></div>
+      <p>Loading your dashboard...</p>
+    </div>
+
+    <div class="dashboard-grid" *ngIf="!isLoading">
       <div class="dashboard-card">
         <div class="card-header">
           <h3>Quick Actions</h3>
@@ -73,32 +88,24 @@
           <h3>Recent Activity</h3>
         </div>
         <div class="activity-list">
-          <div class="activity-item">
-            <div class="activity-icon">
-              <i class="icon-file-text"></i>
-            </div>
-            <div class="activity-content">
-              <p>Applied to Software Engineer at TechCorp</p>
-              <span class="activity-time">2 hours ago</span>
-            </div>
+          <div *ngIf="recentActivities.length === 0" class="no-activity">
+            <i class="icon-clock"></i>
+            <p>No recent activity</p>
+            <small>Start by searching for jobs or updating your profile</small>
           </div>
-          <div class="activity-item">
-            <div class="activity-icon">
-              <i class="icon-calendar"></i>
+          
+          <div *ngFor="let activity of recentActivities" class="activity-item">
+            <div class="activity-icon" [class]="activity.type">
+              <i [class]="activity.icon"></i>
             </div>
             <div class="activity-content">
-              <p>Interview scheduled with StartupXYZ</p>
-              <span class="activity-time">1 day ago</span>
+              <h4>{{activity.title}}</h4>
+              <p>{{activity.description}}</p>
+              <span class="activity-time">{{getTimeAgo(activity.timestamp)}}</span>
             </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-icon">
-              <i class="icon-user"></i>
-            </div>
-            <div class="activity-content">
-              <p>Profile updated</p>
-              <span class="activity-time">3 days ago</span>
-            </div>
+            <a *ngIf="activity.actionUrl" [routerLink]="activity.actionUrl" class="activity-action">
+              <i class="icon-arrow-right"></i>
+            </a>
           </div>
         </div>
       </div>
